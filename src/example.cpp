@@ -14,4 +14,6 @@ int main()
 	std::cout << scinge::circumference(4) << "\n\n";	
 	std::cout << "The standard deviation is:\t" << scinge::standard_deviation(tester) << '\n';
 	std::cout << "The second sample standard is:\t" << scinge::standard_deviation(sample) << '\n';	
+	
+	return 0;
 }
