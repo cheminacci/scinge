@@ -6,7 +6,7 @@
 namespace scinge
 {
 	template <typename T>
-	struct Matrix
+	class Matrix
 	{
 		std::uint64_t number_of_x_elements;
 		std::uint64_t number_of_y_elements;
