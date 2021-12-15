@@ -19,7 +19,7 @@ namespace scinge
 
 	template<typename T>
 	constexpr double standard_deviation(T& value)
-       	{
+	{
 		double mean = average(value);
 		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto& x){return pow((x - mean),2);}) / (double)value.size());
 	}
@@ -34,7 +34,7 @@ namespace scinge
 	
 	template<typename T, typename U>
 	constexpr double velocity(T distance, U time)
-	{ return (distance/ (T)time); }	
+	{ return (distance / (T)time); }	
 
 	template<typename T, typename U>
 	constexpr double acceleration(T distance1, U time1, T distance2, U time2)
@@ -51,6 +51,7 @@ namespace scinge
 	template<typename T>
 	constexpr double triangle_area(T base, T height)
 	{return ((base * height)/2.0) ;}
+
 
 
 };

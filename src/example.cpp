@@ -1,6 +1,7 @@
 // example.cpp
 
 #include "scinge.hpp"
+#include "matrix.hpp"
 #include <array>
 #include <iostream>
 
@@ -16,4 +17,14 @@ int main()
 	std::cout << "The second sample standard is:\t" << scinge::standard_deviation(sample) << '\n';	
 
 	std::cout << "The delta of 56 to 78 is:\t" << scinge::delta(56, 78) << '\n';
+
+	scinge::Matrix<int> square(100,100);	
+	scinge::Matrix<int> cube(100, 100, 100);
+	scinge::Matrix<int> tesseract(100, 100, 100, 100);
+
+	std::cout << "\nMy matrix contains " << square.elements.capacity() << " elements\n";
+	std::cout << "My cube contains " << cube.elements.capacity() << " elements\n";
+	std::cout << "My tesseract contains " << tesseract.elements.capacity() << " elements\n";
+
+	return 0;
 }
