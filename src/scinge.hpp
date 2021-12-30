@@ -9,6 +9,8 @@
 
 namespace scinge
 {
+	using std::numbers::pi;
+
 	template<typename T>
 	constexpr double average(T& value)
 	{ return (std::accumulate(begin(value), end(value), 0.0) / (double)value.size() ); }
@@ -21,7 +23,7 @@ namespace scinge
 	constexpr double standard_deviation(T& value)
 	{
 		double mean = average(value);
-		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto& x){return pow((x - mean),2);}) / (double)value.size());
+		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto &x){return pow((x - mean),2);}) / (double)value.size());
 	}
 
 	template<typename T>
@@ -42,16 +44,75 @@ namespace scinge
 
 	template<typename T>
 	constexpr double circumference(T radius)
-	{return (2*(std::numbers::pi)*(double)radius); }
+	{return (2*pi*(double)radius); }
 
 	template<typename T>
 	constexpr double circle_area(T radius)
-	{return ( (std::numbers::pi) * pow(radius,2) ); }
+	{return ( pi * pow(radius,2) ); }
+
+	template<typename T>
+	constexpr double sphere_volume(T radius)
+	{return ( (4.0/3.0) * pi * pow(radius, 3) ); }
+
+	template<typename T>
+	constexpr double cone_volume(T radius, T height)
+	{return ((pi * pow(radius, 2)) * height) / 3 ; }
+	
+	template<typename T>
+	constexpr double cone_surface_area(T radius, T height)
+	{return ( pi * radius * sqrt(pow(radius, 2) + pow(height, 2)) ) ; }
+	
+	template<typename T>
+	constexpr double cylinder_volume(T radius, T height)
+	{return ( pi * pow(radius, 2) * height ) ; }
+	
+	template<typename T>
+	constexpr double cylinder_surface_area(T radius, T height)
+	{return (( 2 * pi * radius * height ) + (2 * pi * pow(radius, 2))) ; }
+
+	template<typename T>
+	constexpr double sphere_surface_area(T radius)
+	{return  (4 * pi * pow(radius, 2) ); }
 
 	template<typename T>
 	constexpr double triangle_area(T base, T height)
 	{return ((base * height)/2.0) ;}
 
+	template<typename T>
+	constexpr double trapezoid_area(T base_side, T top_side, T height)
+	{return ((top_side + base_side) * height) / 2   ;}
+
+	template<typename T>
+	constexpr T square_area(T length)
+	{return (length*length) ;}
+
+	template<typename T>
+	constexpr T square_perimeter(T length)
+	{return (length * 4) ;}
+
+	template<typename T>
+	constexpr T rectangle_area(T length, T width)
+	{return (length * width) ;}
+
+	template<typename T>
+	constexpr T rectangle_perimeter(T length, T width)
+	{return (2 * length) + (2 * width) ;}
+
+	template<typename T>
+	constexpr T box_volume(T height, T width, T depth)
+	{return (height * width * depth) ;}
+
+	template<typename T>
+	constexpr T box_surface_area(T height, T width, T depth)
+	{return (2 * height * width) + (2 * height * depth) * (2 * width * depth) ;}
+
+	template<typename T>
+	constexpr double cube_volume(T length)
+	{return pow(length, 3) ;}
+
+	template<typename T>
+	constexpr double cube_surface_area(T length)
+	{return 6 * pow(length, 2) ;}
 
 
 };
