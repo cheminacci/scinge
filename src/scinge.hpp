@@ -56,7 +56,7 @@ namespace scinge
 
 	template<typename T>
 	constexpr double cone_volume(T radius, T height)
-	{return ((pi * pow(radius, 2)) * height) / 3 ; }
+	{return ((pi * pow(radius, 2)) * height) / 3.0 ; }
 	
 	template<typename T>
 	constexpr double cone_surface_area(T radius, T height)
@@ -80,7 +80,7 @@ namespace scinge
 
 	template<typename T>
 	constexpr double trapezoid_area(T base_side, T top_side, T height)
-	{return ((top_side + base_side) * height) / 2   ;}
+	{return ((top_side + base_side) * height) / 2.0   ;}
 
 	template<typename T>
 	constexpr T square_area(T length)
