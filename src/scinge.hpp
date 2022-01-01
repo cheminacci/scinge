@@ -15,17 +15,17 @@ namespace scinge
 	
 	template<typename T>
 	constexpr double average(T& value)
-	{ return (std::accumulate(begin(value), end(value), 0.0) / (double)value.size() ); }
+	{ return (std::accumulate(begin(value), end(value), 0.0) / static_cast<double>(value.size()) ); }
 	
 	template<typename T>
 	constexpr double moving_average(T& value, size_t period, size_t position)
-	{ return (std::accumulate( begin(value)+(position), end(value)+(position+period), 0.0) / (double)period ); }
+	{ return (std::accumulate( begin(value)+(position), end(value)+(position+period), 0.0) / static_cast<double>(period) ); }
 
 	template<typename T>
 	constexpr double standard_deviation(T& value)
 	{	
 		double mean = average(value);
-		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto &x){return pow((x - mean),2);}) / (double)value.size());
+		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto &x){return pow((x - mean),2);}) / static_cast<double>(value.size()) );
 	}
 	
 	
@@ -143,7 +143,6 @@ namespace scinge
 	{ return (mass * specific_heat * delta(T1,T2)) ;}
 
 		
-
 
 
 };
