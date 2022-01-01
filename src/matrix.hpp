@@ -16,7 +16,6 @@ namespace scinge
 		
 		public:
 		std::vector<T> elements{0};
-		
 		Matrix()
 		{
 		

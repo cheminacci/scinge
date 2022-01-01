@@ -10,7 +10,9 @@
 namespace scinge
 {
 	using std::numbers::pi;
-
+	constexpr double gravity_acceleration_g = 9.80665;
+	constexpr double gravitational_constant_G = 6.67408e-11;
+	
 	template<typename T>
 	constexpr double average(T& value)
 	{ return (std::accumulate(begin(value), end(value), 0.0) / (double)value.size() ); }
@@ -21,11 +23,12 @@ namespace scinge
 
 	template<typename T>
 	constexpr double standard_deviation(T& value)
-	{
+	{	
 		double mean = average(value);
 		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto &x){return pow((x - mean),2);}) / (double)value.size());
 	}
-
+	
+	
 	template<typename T>
 	constexpr T delta(T start, T finish)
 	{ return (finish - start); }
@@ -113,6 +116,34 @@ namespace scinge
 	template<typename T>
 	constexpr double cube_surface_area(T length)
 	{return 6 * pow(length, 2) ;}
+
+	template<typename T>
+	constexpr T voltage(T current, T resistance)
+	{ return current * resistance ;}
+
+	constexpr double current(double voltage, double resistance)
+	{ return voltage/resistance ;}
+
+	constexpr double resistance(double voltage, double current)
+	{ return voltage/current ;}
+
+	constexpr double kinetic_energy(double mass, double velocity)
+	{ return ( mass * pow(velocity, 2)) / 2 ;}
+
+	constexpr double electrical_power(double current, double voltage)
+	{ return ( current * voltage ) ;}
+
+	constexpr double potential_energy(double mass, double height)
+	{ return mass * gravity_acceleration_g * height ;}
+
+	constexpr double efficiency(double power_output, double power_input)
+	{ return (power_output/power_input)/100 ;}
+
+	constexpr double thermal_energy(double mass, double specific_heat, double T1, double T2)
+	{ return (mass * specific_heat * delta(T1,T2)) ;}
+
+		
+
 
 
 };
