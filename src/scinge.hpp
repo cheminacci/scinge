@@ -10,16 +10,35 @@
 namespace scinge
 {
 	using std::numbers::pi;
+
 	constexpr double gravity_acceleration_g = 9.80665;
 	constexpr double gravitational_constant_G = 6.67408e-11;
-	
+	constexpr double speed_of_light_in_vacuum = 2.99792458e8;
+	constexpr double plancks_constant = 6.626069e-34;
+	constexpr double reduced_planck_bar = 1.054571817e-34;
+	constexpr double planck_length = 1.616255e-35;
+	constexpr double planck_mass = 2.176434e-8;
+	constexpr double planck_temperature = 1.416784e32;
+	constexpr double elementary_charge = 1.602176634e-19;
+	constexpr double electron_volt = 1.602176634e-19;
+	constexpr double vacuum_magnetic_permeability = 1.25663706212e-6;
+	constexpr double vacuum_electric_permittivity = 8.8541878128e-12;
+	constexpr double electron_mass = 9.1093837015e-31;
+	constexpr double proton_mass = 1.67262192369e-27;
+	constexpr double proton_electron_mass_ratio = 1836.15267343;
+	constexpr double boltzmann_constant = 1.380649e-23;
+	constexpr double avogadro_number = 6.02214076e-23;
+	constexpr double molar_gas_constant_R = 8.314462618;
+	constexpr double faraday_constant = 96485.33212;
+	constexpr double stefan_boltzmann = 5.670374419e-8;
+
 	template<typename T>
 	constexpr double average(T& value)
 	{ return (std::accumulate(begin(value), end(value), 0.0) / static_cast<double>(value.size()) ); }
 	
 	template<typename T>
 	constexpr double moving_average(T& value, size_t period, size_t position)
-	{ return (std::accumulate( begin(value)+(position), end(value)+(position+period), 0.0) / static_cast<double>(period) ); }
+	{ return (std::accumulate( begin(value)+position, begin(value)+position+period, 0.0) / static_cast<double>(period) ); }
 
 	template<typename T>
 	constexpr double standard_deviation(T& value)
