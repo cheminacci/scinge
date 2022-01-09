@@ -51,14 +51,29 @@ int main()
 	tesseract.populate_tesseract(10,50,75,25, 4200);
 	tesseract.print_tesseract_element(10,50,75,25);	
 
-	auto t2 = high_resolution_clock::now();
 
-	auto ms_int = duration_cast<std::chrono::milliseconds>(t2 - t1);
+	std::cout << "\nThe 0th fibonacci number is:\t" << scinge::fibonacci(0) << "\n";
+	std::cout << "The 1st fibonacci number is:\t" << scinge::fibonacci(1) << "\n";
+	std::cout << "The 2nd fibonacci number is:\t" << scinge::fibonacci(2) << "\n";
+	std::cout << "The 3rd fibonacci number is:\t" << scinge::fibonacci(3) << "\n";
+	std::cout << "The 4th fibonacci number is:\t" << scinge::fibonacci(4) << "\n";
+	std::cout << "The 5th fibonacci number is:\t" << scinge::fibonacci(5) << "\n";
+	std::cout << "The 6th fibonacci number is:\t" << scinge::fibonacci(6) << "\n";
+	std::cout << "The 7th fibonacci number is:\t" << scinge::fibonacci(7) << "\n";
+	std::cout << "The 8th fibonacci number is:\t" << scinge::fibonacci(8) << "\n";
+	std::cout << "The 9th fibonacci number is:\t" << scinge::fibonacci(9) << "\n";
+	std::cout << "The 10th fibonacci number is:\t" << scinge::fibonacci(10) << "\n";
+	std::cout << "The 20th fibonacci number is:\t" << scinge::fibonacci(20) << "\n";
+	std::cout << "The 50th fibonacci number is:\t" << scinge::fibonacci(50) << "\n";
+	std::cout << "The 75th fibonacci number is:\t" << scinge::fibonacci(75) << "\n";
+	std::cout << "The 100th fibonacci number is:\t" << scinge::fibonacci_binet(100) << "\n";
+	
+	auto t2 = high_resolution_clock::now();
 	duration<double, std::milli> ms_double = t2 - t1;
 
-	std::cout << ms_int.count() << "ms\n";
-	std::cout << ms_double.count() << "ms\n";
+	std::cout << "\nTotal run time was:\t" << ms_double.count() << " milliseconds\n";
 
+	
 	
 	return 0;
 }

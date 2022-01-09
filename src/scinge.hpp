@@ -30,7 +30,7 @@ namespace scinge
 	constexpr double avogadro_number = 6.02214076e-23;
 	constexpr double molar_gas_constant_R = 8.314462618;
 	constexpr double faraday_constant = 96485.33212;
-	constexpr double stefan_boltzmann = 5.670374419e-8;
+	constexpr double stefan_boltzmann = 5.670374419e-8; 
 
 	template<typename T>
 	constexpr double average(T& value)
@@ -46,7 +46,6 @@ namespace scinge
 		double mean = average(value);
 		return sqrt( std::transform_reduce(begin(value), end(value), 0.0, std::plus{}, [mean](auto &x){return pow((x - mean),2);}) / static_cast<double>(value.size()) );
 	}
-	
 	
 	template<typename T>
 	constexpr T delta(T start, T finish)
@@ -135,6 +134,42 @@ namespace scinge
 	template<typename T>
 	constexpr double cube_surface_area(T length)
 	{return 6 * pow(length, 2) ;}
+
+//  Fibonacci using a loop (Fast and accurate up to UINT64_MAX)
+
+	constexpr uint64_t fibonacci(uint64_t fib_count)
+	{	
+		uint64_t temp_sum = 0, val1 = 0, val2 = 1;
+
+		if(fib_count==0)
+		{return 0;}
+		else if(fib_count==1)
+		{return 1;}
+
+		else
+		for(uint64_t i=2; i<=fib_count; i++)
+		{
+			temp_sum = val1 + val2;
+			val1 = val2;
+			val2 = temp_sum;
+		}
+		return temp_sum;
+	}
+
+//  Fibonacci Using recursion (VERY SLOW)
+	constexpr uint64_t fibonacci_recursive(uint64_t fib_count)
+	{
+		if(fib_count==0)
+		{return 0;}
+		else if(fib_count==1)
+		{return 1;}
+		else
+		return fibonacci_recursive(fib_count-2) + fibonacci_recursive(fib_count-1);
+	}
+
+//  Fibonacci Using Binet's formula (VERY FAST, But less accurate for larger numbers)
+	constexpr double fibonacci_binet(uint64_t fib_count)
+	{	return pow(5, -0.5) * ( pow( (1 + sqrt(5))/2, static_cast<double>(fib_count)) - pow( (1 - sqrt(5))/2, static_cast<double>(fib_count)) ) ;}
 
 	template<typename T>
 	constexpr T voltage(T current, T resistance)
