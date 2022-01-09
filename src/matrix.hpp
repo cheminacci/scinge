@@ -16,6 +16,7 @@ namespace scinge
 		
 		public:
 		std::vector<T> elements{0};
+
 		Matrix()
 		{
 		
@@ -24,20 +25,19 @@ namespace scinge
 		Matrix(std::uint64_t number_of_x_elements)
 		{ 
 			elements.reserve(number_of_x_elements);
-	       		Matrix::number_of_x_elements = number_of_x_elements;	
+       		Matrix::number_of_x_elements = number_of_x_elements;	
 		}
 
 		Matrix(std::uint64_t number_of_x_elements, std::uint64_t number_of_y_elements)
 		{
-	       		elements.reserve(number_of_x_elements * number_of_y_elements);
+       		elements.reserve(number_of_x_elements * number_of_y_elements);
 			Matrix::number_of_x_elements = number_of_x_elements;
 			Matrix::number_of_y_elements = number_of_y_elements;
-	       	}
+       	}
 		
 		Matrix(std::uint64_t number_of_x_elements, std::uint64_t number_of_y_elements, std::uint64_t number_of_z_elements)
 		{ 
 			elements.reserve(number_of_x_elements * number_of_y_elements * number_of_z_elements);	
-			
 			Matrix::number_of_x_elements = number_of_x_elements;
 			Matrix::number_of_y_elements = number_of_y_elements;
 			Matrix::number_of_z_elements = number_of_z_elements;
@@ -50,9 +50,7 @@ namespace scinge
 			Matrix::number_of_y_elements = number_of_y_elements;
 			Matrix::number_of_z_elements = number_of_z_elements;
 			Matrix::number_of_w_elements = number_of_w_elements;
-		
 		}
-
 
 		void populate_vector(uint64_t x_position, T value)
 		{	
@@ -77,10 +75,9 @@ namespace scinge
 					    (number_of_x_elements * number_of_y_elements * number_of_z_elements * w_position);	
 			Matrix::elements[location] = value;
 		}
-
 		
 		void print_vector_element(uint64_t x)
-		{ std::cout << "Element at vector position " << x << " is:\t" << elements[x] <<'\n'; }
+		{ std::cout << "The element at vector position " << x << " is:\t" << elements[x] <<'\n'; }
 
 		void print_square_element(uint64_t x_position, uint64_t y_position)
 		{	
@@ -90,7 +87,6 @@ namespace scinge
 				<< y_position << ") is:\t" 
 				<< elements[location] << '\n';
 		}
-
 
 		void print_cube_element(uint64_t x_position, uint64_t y_position, uint64_t z_position)
 		{	
