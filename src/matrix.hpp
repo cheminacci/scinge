@@ -2,10 +2,17 @@
 #include <algorithm>
 #include <numeric>
 #include <cstdint>
-#include <iostream>
+
+#ifndef FMT_HEADER_ONLY
+	#define FMT_HEADER_ONLY
+	#include <fmt/core.h>
+#endif
+
+using fmt::print;
 
 namespace scinge
-{
+{	
+	
 	template <typename T>
 	class Matrix
 	{
@@ -77,37 +84,25 @@ namespace scinge
 		}
 		
 		void print_vector_element(uint64_t x)
-		{ std::cout << "The element at vector position " << x << " is:\t" << elements[x] <<'\n'; }
+		{ 	print("The element at vector position {} is:\t{}\n", x, elements[x]); }
 
 		void print_square_element(uint64_t x_position, uint64_t y_position)
 		{	
 			uint64_t location = ((y_position * number_of_x_elements) + x_position ); 
-			std::cout << "The element at coordinate (" 
-				<< x_position << " , " 
-				<< y_position << ") is:\t" 
-				<< elements[location] << '\n';
+			print("The element at coordinate ({}, {}) is:\t{}\n", x_position, y_position, elements[location]); 
 		}
 
 		void print_cube_element(uint64_t x_position, uint64_t y_position, uint64_t z_position)
 		{	
 			uint64_t location = ((y_position * number_of_x_elements) + x_position ) + (number_of_x_elements * number_of_y_elements * z_position);
-			std::cout << "The element at coordinate (" 
-				<< x_position << " , " 
-				<< y_position << " , " 
-				<< z_position << ") is:\t" 
-				<< elements[location] << '\n';
+			print("The element at coordinate ({}, {}, {}) is:\t{}\n", x_position, y_position, z_position, elements[location]);
 		}
 
 		void print_tesseract_element(uint64_t x_position, uint64_t y_position, uint64_t z_position, uint64_t w_position)
 		{	
 			uint64_t location = ((y_position * number_of_x_elements) + x_position ) + (number_of_x_elements * number_of_y_elements * z_position) + \
 					    (number_of_x_elements * number_of_y_elements * number_of_z_elements * w_position);	
-			std::cout << "The element at coordinate (" 
-				<< x_position << " , " 
-				<< y_position << " , " 
-				<< z_position << " , " 
-				<< w_position << ") is:\t" 
-				<< elements[location] << '\n';
+			print("The element at coordinate ({}, {}, {}, {}) is:\t{}\n", x_position, y_position, z_position, w_position, elements[location]);
 		}
 	};
 

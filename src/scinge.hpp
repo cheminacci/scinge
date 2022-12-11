@@ -1,11 +1,13 @@
 // scinge.hpp
 
 #include <cmath>
-#include <iterator>
+#include <cstdint>
 #include <numeric>
-#include <functional>
 #include <algorithm>
 #include <numbers>
+#include <concepts>
+
+//#include <boost/multiprecision/cpp_int.hpp>
 
 namespace scinge
 {
@@ -33,12 +35,16 @@ namespace scinge
 	constexpr double stefan_boltzmann = 5.670374419e-8; 
 
 	template<typename T>
+	concept regular_number = (std::integral<T> || std::floating_point<T>) ;
+	
+
+	template<typename T>
 	constexpr double average(T& value)
-	{ return (std::accumulate(begin(value), end(value), 0.0) / static_cast<double>(value.size()) ); }
+	{ return (std::accumulate(begin(value), end(value), 0.0) / static_cast<double>(value.size())); }
 	
 	template<typename T>
 	constexpr double moving_average(T& value, size_t period, size_t position)
-	{ return (std::accumulate( begin(value)+position, begin(value)+position+period, 0.0) / static_cast<double>(period) ); }
+	{ return (std::accumulate(begin(value)+position, begin(value)+position+period, 0.0) / static_cast<double>(period)); }
 
 	template<typename T>
 	constexpr double standard_deviation(T& value)
@@ -48,98 +54,120 @@ namespace scinge
 	}
 	
 	template<typename T>
+	requires regular_number<T>
 	constexpr T delta(T start, T finish)
 	{ return (finish - start); }
 
 	template<typename T>
+	requires regular_number<T>
 	constexpr T delta_2nd(T start1, T finish1, T start2, T finish2)
 	{ return (delta(finish1 - start1) - delta(finish2 - start2)); }
 	
 	template<typename T, typename U>
+	requires regular_number<T> && regular_number<U>
 	constexpr double velocity(T distance, U time)
 	{ return (distance / (T)time); }	
 
 	template<typename T, typename U>
+	requires regular_number<T> && regular_number<U>
 	constexpr double acceleration(T distance1, U time1, T distance2, U time2)
 	{ return velocity(distance2, time2) - velocity(distance1, time1); }	
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double circumference(T radius)
 	{return (2*pi*(double)radius); }
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double circle_area(T radius)
 	{return ( pi * pow(radius,2) ); }
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double sphere_volume(T radius)
 	{return ( (4.0/3.0) * pi * pow(radius, 3) ); }
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cone_volume(T radius, T height)
 	{return ((pi * pow(radius, 2)) * height) / 3.0 ; }
 	
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cone_surface_area(T radius, T height)
 	{return ( pi * radius * sqrt(pow(radius, 2) + pow(height, 2)) ) ; }
 	
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cylinder_volume(T radius, T height)
 	{return ( pi * pow(radius, 2) * height ) ; }
 	
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cylinder_surface_area(T radius, T height)
 	{return (( 2 * pi * radius * height ) + (2 * pi * pow(radius, 2))) ; }
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double sphere_surface_area(T radius)
 	{return  (4 * pi * pow(radius, 2) ); }
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double triangle_area(T base, T height)
 	{return ((base * height)/2.0) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double trapezoid_area(T base_side, T top_side, T height)
 	{return ((top_side + base_side) * height) / 2.0   ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T square_area(T length)
 	{return (length*length) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T square_perimeter(T length)
 	{return (length * 4) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T rectangle_area(T length, T width)
 	{return (length * width) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T rectangle_perimeter(T length, T width)
 	{return (2 * length) + (2 * width) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T box_volume(T height, T width, T depth)
 	{return (height * width * depth) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T box_surface_area(T height, T width, T depth)
 	{return (2 * height * width) + (2 * height * depth) * (2 * width * depth) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cube_volume(T length)
 	{return pow(length, 3) ;}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr double cube_surface_area(T length)
 	{return 6 * pow(length, 2) ;}
 
-//  Fibonacci using a loop (Fast and accurate up to UINT64_MAX)
-
-	constexpr uint64_t fibonacci(uint64_t fib_count)
+//  Fibonacci using a loop
+/*	
+	constexpr boost::multiprecision::uint128_t fibonacci_big(uint64_t fib_count)
 	{	
-		uint64_t temp_sum = 0, val1 = 0, val2 = 1;
+		boost::multiprecision::uint128_t temp_sum = 0, val1 = 0, val2 = 1;
 
 		if(fib_count==0)
 		{return 0;}
@@ -155,9 +183,35 @@ namespace scinge
 		}
 		return temp_sum;
 	}
+*/
+	
+//  Fibonacci using a loop
+
+	template<typename T> 
+	requires std::integral<T>
+	constexpr std::uint64_t fibonacci(T fib_count)
+	{	
+		std::uint64_t temp_sum = 0, val1 = 0, val2 = 1;
+
+		if(fib_count==0)
+		{return 0;}
+		else if(fib_count==1)
+		{return 1;}
+
+		else
+		for(T i=2; i<=fib_count; i++)
+		{
+			temp_sum = val1 + val2;
+			val1 = val2;
+			val2 = temp_sum;
+		}
+		return temp_sum;
+	}
 
 //  Fibonacci Using recursion (VERY SLOW)
-	constexpr uint64_t fibonacci_recursive(uint64_t fib_count)
+	template<typename T>
+	requires std::integral<T>
+	constexpr std::uint64_t fibonacci_recursive(T fib_count)  
 	{
 		if(fib_count==0)
 		{return 0;}
@@ -168,10 +222,15 @@ namespace scinge
 	}
 
 //  Fibonacci Using Binet's formula (VERY FAST, But less accurate for larger numbers)
-	constexpr double fibonacci_binet(uint64_t fib_count)
-	{	return pow(5, -0.5) * ( pow( (1 + sqrt(5))/2, static_cast<double>(fib_count)) - pow( (1 - sqrt(5))/2, static_cast<double>(fib_count)) ) ;}
+	template<typename T>
+	requires std::integral<T>
+	constexpr double fibonacci_binet(T fib_count)
+	{	
+		return pow(5, -0.5) * (pow((1 + sqrt(5))/2, static_cast<double>(fib_count)) - pow((1 - sqrt(5))/2, static_cast<double>(fib_count)));
+	}
 
 	template<typename T>
+	requires regular_number<T> 
 	constexpr T voltage(T current, T resistance)
 	{ return current * resistance ;}
 
@@ -197,6 +256,7 @@ namespace scinge
 	{ return (mass * specific_heat * delta(T1,T2)) ;}
 
 		
+
 
 
 };
