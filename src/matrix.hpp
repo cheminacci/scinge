@@ -25,7 +25,7 @@ namespace scinge
 		constexpr Matrix_1d(std::uint64_t number_of_x_elements)
 		{ 
 			elements.reserve(number_of_x_elements);
-       		Matrix_1d::number_of_x_elements = number_of_x_elements;	
+       			Matrix_1d::number_of_x_elements = number_of_x_elements;	
 		}
 
 		constexpr void populate_vector(std::uint64_t x_position, T value)
@@ -49,10 +49,10 @@ namespace scinge
 
 		constexpr Matrix_2d(std::uint64_t number_of_x_elements, std::uint64_t number_of_y_elements)
 		{
-       		elements.reserve(number_of_x_elements * number_of_y_elements);
+			elements.reserve(number_of_x_elements * number_of_y_elements);
 			Matrix_2d::number_of_x_elements = number_of_x_elements;
 			Matrix_2d::number_of_y_elements = number_of_y_elements;
-       	}
+       		}
 		
 		constexpr void populate_square_matrix(std::uint64_t x_position, std::uint64_t y_position, T value)
 		{	
