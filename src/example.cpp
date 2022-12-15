@@ -3,6 +3,7 @@
 #include <array>
 #include <chrono>
 #include <algorithm>
+#include <string>
 #include "scinge.hpp"
 #include "matrix.hpp"
 
@@ -23,6 +24,8 @@ int main()
 	using std::chrono::duration_cast;
 
 		
+	auto t1 = high_resolution_clock::now();
+
 	print("The average for the first 3 elements of tester array is:\t{}\n", scinge::moving_average(tester, 3, 0));
 	print("The average of the tester array is:\t{}\n", scinge::average(tester)); 
 	print("The circumference of a circle with radius 4 is:\t{}\n\n", scinge::circumference(4));	
@@ -30,10 +33,10 @@ int main()
 	print("The second sample standard is:\t{}\n", scinge::standard_deviation(sample));	
 	print("The delta of 56 to 78 is:\t{}\n", scinge::delta(56, 78));
 
-	scinge::Matrix<float> basic(10);
-	scinge::Matrix<int> square(100,100);	
-	scinge::Matrix<int> cube(100, 100, 100);
-	scinge::Matrix<int> tesseract(100, 100, 100, 100);
+	scinge::Matrix_1d<float> basic(10);
+	scinge::Matrix_2d<int> square(100,100);	
+	scinge::Matrix_3d<int> cube(100, 100, 100);
+	scinge::Matrix_4d<std::string> tesseract(100, 100, 100, 100);
 	
 	print("\nMy vector contains {} elements\n", basic.elements.capacity());
 	basic.populate_vector(5, 4.2f);
@@ -53,11 +56,10 @@ int main()
 	print("\n");
 
 	print("\nMy tesseract contains {} elements\n\n", tesseract.elements.capacity());
-	tesseract.populate_tesseract(10,50,75,25, 4200);
+	tesseract.populate_tesseract(10,50,75,25, "Hello I am an element within a tesseract!");
 	tesseract.print_tesseract_element(10,50,75,25);	
 	print("\n");
 
-	auto t1 = high_resolution_clock::now();
 
 	print("The 0th fibonacci number is:\t{}\n", scinge::fibonacci(0));
 	print("The 1st fibonacci number is:\t{}\n", scinge::fibonacci(1));
@@ -81,7 +83,6 @@ int main()
 
 	print("\nTotal run time was:\t{} milliseconds\n", ms_double.count());
 	print("Total run time was:\t{} microseconds\n", us_double.count());
-
 
 	return 0;
 }

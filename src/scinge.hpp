@@ -91,22 +91,22 @@ namespace scinge
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cone_volume(T radius, T height)
-	{return ((pi * pow(radius, 2)) * height) / 3.0 ; }
+	{return ((pi * pow(radius, 2)) * height) / 3.0; }
 	
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cone_surface_area(T radius, T height)
-	{return ( pi * radius * sqrt(pow(radius, 2) + pow(height, 2)) ) ; }
+	{return ( pi * radius * sqrt(pow(radius, 2) + pow(height, 2)) ); }
 	
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cylinder_volume(T radius, T height)
-	{return ( pi * pow(radius, 2) * height ) ; }
+	{return ( pi * pow(radius, 2) * height ); }
 	
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cylinder_surface_area(T radius, T height)
-	{return (( 2 * pi * radius * height ) + (2 * pi * pow(radius, 2))) ; }
+	{return (( 2 * pi * radius * height ) + (2 * pi * pow(radius, 2))); }
 
 	template<typename T>
 	requires regular_number<T> 
@@ -116,52 +116,52 @@ namespace scinge
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double triangle_area(T base, T height)
-	{return ((base * height)/2.0) ;}
+	{return ((base * height)/2.0);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double trapezoid_area(T base_side, T top_side, T height)
-	{return ((top_side + base_side) * height) / 2.0   ;}
+	{return ((top_side + base_side) * height) / 2.0;}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T square_area(T length)
-	{return (length*length) ;}
+	{return (length*length);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T square_perimeter(T length)
-	{return (length * 4) ;}
+	{return (length * 4);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T rectangle_area(T length, T width)
-	{return (length * width) ;}
+	{return (length * width);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T rectangle_perimeter(T length, T width)
-	{return (2 * length) + (2 * width) ;}
+	{return (2 * length) + (2 * width);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T box_volume(T height, T width, T depth)
-	{return (height * width * depth) ;}
+	{return (height * width * depth);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr T box_surface_area(T height, T width, T depth)
-	{return (2 * height * width) + (2 * height * depth) * (2 * width * depth) ;}
+	{return (2 * height * width) + (2 * height * depth) * (2 * width * depth);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cube_volume(T length)
-	{return pow(length, 3) ;}
+	{return pow(length, 3);}
 
 	template<typename T>
 	requires regular_number<T> 
 	constexpr double cube_surface_area(T length)
-	{return 6 * pow(length, 2) ;}
+	{return 6 * pow(length, 2);}
 
 //  Fibonacci using a loop
 /*	
@@ -184,7 +184,7 @@ namespace scinge
 		return temp_sum;
 	}
 */
-	
+
 //  Fibonacci using a loop
 
 	template<typename T> 
